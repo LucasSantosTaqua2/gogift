@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gift Card Utilizado</title>
+    <style type="text/css">
+        /* Estilos Base idênticos aos outros templates */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #1d1302; font-family: 'Poppins', Arial, sans-serif; color: #efe8e0; }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #5b4b3f;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #c9720e;
+        }
+        .header { background-color: #e68210; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; color: #1d1302; font-size: 28px; line-height: 1.2; }
+        
+        .content { padding: 30px 20px; text-align: center; }
+        .content h2 { margin-top: 0; color: #ffffff; font-size: 24px; }
+        .content p { font-size: 16px; line-height: 1.6; margin: 15px 0; color: #efe8e0; }
+
+        /* Box de Destaque */
+        .info-box {
+            background-color: #4a3b32;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #e68210;
+            margin: 25px 0;
+            text-align: left;
+        }
+        .info-row { margin-bottom: 10px; }
+        .info-label { color: #e68210; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; display: block; }
+        .info-value { color: #ffffff; font-size: 18px; font-weight: bold; }
+
+        .btn-wrapper { margin-top: 30px; }
+        .button { background-color: #e68210; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; }
+    </style>
+</head>
+<body>
+    <center style="width: 100%; background-color: #1d1302;">
+        <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="header">
+                    <h1>Go<span style="color: #efe8e0;">Gift</span></h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="content">
+                    <h2>Olá, {{ recipient_name }}!</h2>
+                    <p>Seu Gift Card foi utilizado com sucesso! ✅</p>
+                    
+                    <p>Esperamos que você (ou quem você presenteou) tenha aproveitado a experiência.</p>
+
+                    <div class="info-box">
+                        <div class="info-row">
+                            <span class="info-label">Produto</span>
+                            <span class="info-value">{{ product_title }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Código Utilizado</span>
+                            <span class="info-value" style="font-family: monospace;">{{ code }}</span>
+                        </div>
+                        <div class="info-row" style="margin-bottom: 0;">
+                            <span class="info-label">Validado Por</span>
+                            <span class="info-value">{{ enterprise_name }}</span>
+                        </div>
+                    </div>
+
+                    <div class="btn-wrapper">
+                        <a href="http://localhost:4200/minhas-compras" class="button">Ver Histórico</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

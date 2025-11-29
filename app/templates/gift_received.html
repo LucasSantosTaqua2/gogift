@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Você ganhou um presente!</title>
+    <style type="text/css">
+        /* --- ESTILOS GERAIS (IDÊNTICOS AO PURCHASE_CONFIRMATION) --- */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #1d1302; font-family: 'Poppins', Arial, sans-serif; color: #efe8e0; }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #5b4b3f;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #c9720e;
+        }
+        .header { background-color: #e68210; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; color: #1d1302; font-size: 28px; line-height: 1.2; }
+        
+        .content { padding: 30px 20px; text-align: center; }
+        .content h2 { margin-top: 0; color: #ffffff; font-size: 24px; }
+        .content p { font-size: 16px; line-height: 1.6; margin: 15px 0; color: #efe8e0; }
+
+        /* Estilo da Mensagem Personalizada */
+        .message-box {
+            background-color: #4a3b32;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 5px solid #e68210;
+            margin: 20px 0;
+            text-align: left;
+            font-style: italic;
+            color: #ffffff;
+        }
+
+        /* Destaque do Produto */
+        .product-highlight { margin: 25px 0; }
+        .product-img { border-radius: 8px; border: 2px solid #705c4e; max-width: 200px; display: block; margin: 0 auto 10px auto; }
+        .product-title { font-size: 20px; font-weight: bold; color: #e68210; margin-bottom: 5px; }
+
+        /* Seção de Códigos e QR */
+        .codes-section { margin-top: 30px; background-color: #efe8e0; border-radius: 8px; padding: 25px 20px; color: #333333; text-align: center; }
+        
+        .qr-table { width: 100%; background-color: #ffffff; border-radius: 8px; border: 1px solid #dddddd; margin-bottom: 15px; }
+        .qr-cell-img { width: 140px; padding: 15px; text-align: center; vertical-align: middle; border-right: 1px solid #eeeeee; }
+        .qr-cell-text { padding: 15px; vertical-align: middle; text-align: left; }
+        
+        .code-label { font-size: 12px; color: #777777; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 5px 0; }
+        .code-value { font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; color: #000000; background-color: #f4f4f4; padding: 8px 12px; border-radius: 4px; display: inline-block; border: 1px solid #e0e0e0; word-break: break-all; }
+
+        /* Botão */
+        .btn-wrapper { margin-top: 30px; }
+        .button { background-color: #e68210; color: #ffffff; padding: 16px 30px; text-decoration: none; display: inline-block; border-radius: 50px; font-weight: bold; font-size: 16px; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+
+        /* Mobile */
+        @media only screen and (max-width: 600px) {
+            .container { width: 100% !important; border-radius: 0 !important; border: none !important; }
+            .content { padding: 20px 15px !important; }
+            .qr-cell-img { display: block !important; width: 100% !important; border-right: none !important; border-bottom: 1px solid #eeeeee !important; padding: 20px 0 !important; }
+            .qr-cell-text { display: block !important; width: 100% !important; text-align: center !important; padding: 20px 10px !important; }
+            .button { display: block !important; width: auto !important; margin: 0 20px !important; }
+        }
+    </style>
+</head>
+<body>
+    <center style="width: 100%; background-color: #1d1302;">
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Você ganhou um presente de {{ sender_name }}! Abra para ver.
+        </div>
+
+        <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="header">
+                    <h1>Go<span style="color: #efe8e0;">Gift</span></h1>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="content">
+                    <h2>Olá, {{ recipient_name }}!</h2>
+                    <p>Você acabou de receber um presente especial de <strong>{{ sender_name }}</strong>! 🎉</p>
+                    
+                    {% if message %}
+                    <div class="message-box">
+                        "{{ message }}"
+                    </div>
+                    {% endif %}
+
+                    <div class="product-highlight">
+                        {% if image_url %}
+                        <img src="{{ image_url }}" alt="{{ product_title }}" class="product-img" width="200">
+                        {% endif %}
+                        <div class="product-title">{{ product_title }}</div>
+                    </div>
+
+                    <div class="codes-section">
+                        <h3 style="color: #1d1302; margin-top: 0;">🚀 Seus Códigos de Resgate</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                            Apresente o QR Code abaixo no estabelecimento ou utilize o código de texto.
+                        </p>
+
+                        {% for code in codes %}
+                            {% if code | trim != '' %}
+                            <table class="qr-table" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="qr-cell-img">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ code | trim }}" 
+                                             alt="QR Code" width="120" height="120" style="display:block; margin: 0 auto;">
+                                    </td>
+                                    <td class="qr-cell-text">
+                                        <p class="code-label">Código:</p>
+                                        <div class="code-value">{{ code | trim }}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="btn-wrapper">
+                        <a href="http://localhost:4200" class="button">Acessar GoGift</a>
+                    </div>
+                    
+                    <p style="font-size: 12px; color: #888; margin-top: 30px;">
+                        Dúvidas? Entre em contato com nosso suporte.
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

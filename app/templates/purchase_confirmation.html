@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Confirmação de Compra</title>
+    <style type="text/css">
+        /* Reset básico */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #1d1302; font-family: 'Poppins', Arial, sans-serif; color: #efe8e0; }
+
+        /* Estilos Desktop (Padrão) */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #5b4b3f;
+            border-radius: 8px; /* Reduzido para compatibilidade */
+            overflow: hidden;
+            border: 1px solid #c9720e;
+        }
+        .header { background-color: #e68210; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; color: #1d1302; font-size: 28px; line-height: 1.2; }
+        
+        .content { padding: 30px 20px; }
+        .content h2 { text-align: center; margin-top: 0; color: #ffffff; font-size: 24px; }
+        .content p { font-size: 16px; line-height: 1.6; margin: 15px 0; color: #efe8e0; text-align: center; }
+        
+        .order-box { background-color: #4a3b32; padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 30px; border: 1px dashed #705c4e; }
+        
+        /* Tabela de Resumo */
+        .summary-table { width: 100%; border-collapse: collapse; margin-top: 10px; color: #efe8e0; }
+        .summary-table th { background-color: #705c4e; padding: 12px; text-align: left; font-size: 14px; }
+        .summary-table td { padding: 12px; border-bottom: 1px solid #705c4e; font-size: 14px; }
+        .summary-table .text-right { text-align: right; }
+        .summary-table .text-center { text-align: center; }
+        .footer-total { font-weight: bold; font-size: 16px; color: #e68210; }
+
+        /* Seção de Códigos */
+        .codes-section { margin-top: 40px; background-color: #efe8e0; border-radius: 8px; padding: 25px 20px; color: #333333; }
+        .product-block { border-bottom: 2px dashed #ccc; padding-bottom: 25px; margin-bottom: 25px; }
+        .product-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .product-title { color: #e68210; font-size: 20px; margin-bottom: 15px; font-weight: bold; text-align: center; }
+        
+        /* Box do Código (Tabela aninhada para substituir Flexbox) */
+        .qr-table { width: 100%; background-color: #ffffff; border-radius: 8px; border: 1px solid #dddddd; margin-bottom: 15px; }
+        .qr-cell-img { width: 140px; padding: 15px; text-align: center; vertical-align: middle; border-right: 1px solid #eeeeee; }
+        .qr-cell-text { padding: 15px; vertical-align: middle; text-align: left; }
+        
+        .code-label { font-size: 12px; color: #777777; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 5px 0; }
+        .code-value { font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; color: #000000; background-color: #f4f4f4; padding: 8px 12px; border-radius: 4px; display: inline-block; border: 1px solid #e0e0e0; word-break: break-all; }
+
+        /* Botão */
+        .btn-wrapper { text-align: center; margin-top: 30px; }
+        .button { background-color: #e68210; color: #ffffff; padding: 16px 30px; text-align: center; text-decoration: none; display: inline-block; border-radius: 50px; font-weight: bold; font-size: 16px; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+
+        /* --- MEDIA QUERIES PARA MOBILE --- */
+        @media only screen and (max-width: 600px) {
+            .container { width: 100% !important; border-radius: 0 !important; border: none !important; }
+            .content { padding: 20px 15px !important; }
+            .header h1 { font-size: 24px !important; }
+            
+            /* Ajuste de tabelas */
+            .summary-table th, .summary-table td { padding: 8px 5px !important; font-size: 13px !important; }
+            
+            /* Empilhar QR Code e Texto no Mobile */
+            .qr-cell-img { display: block !important; width: 100% !important; border-right: none !important; border-bottom: 1px solid #eeeeee !important; padding: 20px 0 !important; }
+            .qr-cell-text { display: block !important; width: 100% !important; text-align: center !important; padding: 20px 10px !important; }
+            
+            .button { display: block !important; width: auto !important; margin: 0 20px !important; }
+        }
+    </style>
+</head>
+<body>
+    <center style="width: 100%; background-color: #1d1302;">
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Sua compra foi confirmada! Acesse seus códigos agora.
+        </div>
+
+        <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="header">
+                    <h1>Go<span style="color: #efe8e0;">Gift</span></h1>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="content">
+                    <h2>Olá, {{ username }}!</h2>
+                    <p>Sua compra foi confirmada com sucesso! 🎉</p>
+                    
+                    <div class="order-box">
+                        <strong style="color:#e68210; font-size:12px; text-transform: uppercase;">Número do Pedido</strong><br>
+                        <span style="font-size: 18px; color: #ffffff; letter-spacing: 1px;">#{{ order_id }}</span>
+                    </div>
+
+                    <h3 style="margin-bottom: 15px; color: #e68210; text-align: left;">Resumo Financeiro</h3>
+                    <table class="summary-table" role="presentation">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th class="text-center" width="50">Qtd.</th>
+                                <th class="text-right" width="100">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                                <td>{{ item.title }}</td>
+                                <td class="text-center">{{ item.quantity }}</td>
+                                <td class="text-right">R$ {{ "%.2f"|format(item.subtotal) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-right footer-total" style="padding-top: 20px; border-bottom: none;">Total Pago:</td>
+                                <td class="text-right footer-total" style="padding-top: 20px; border-bottom: none;">R$ {{ "%.2f"|format(total_price) }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="codes-section">
+                        <h3 style="text-align: center; margin-top: 0; color: #1d1302; font-size: 22px;">🚀 Seus Códigos</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 30px;">
+                            Mostre o QR Code no caixa ou digite o código.
+                        </p>
+
+                        {% for item in items %}
+                            {% if item.final_giftcard_codes %}
+                                <div class="product-block">
+                                    <div class="product-title">{{ item.title }}</div>
+                                    
+                                    {% set codes_list = item.final_giftcard_codes.split(';') %}
+                                    
+                                    {% for code in codes_list %}
+                                        {% if code | trim != '' %}
+                                            <table class="qr-table" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="qr-cell-img">
+                                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ code | trim }}" 
+                                                             alt="QR Code" width="120" height="120" style="display:block; margin: 0 auto;">
+                                                    </td>
+                                                    <td class="qr-cell-text">
+                                                        <p class="code-label">Código de Resgate:</p>
+                                                        <div class="code-value">{{ code | trim }}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="btn-wrapper">
+                         <a href="{{ base_url }}/minhas-compras" class="button">Acessar Minha Conta</a>
+                    </div>
+                    
+                    <p style="font-size: 12px; color: #888; margin-top: 30px;">
+                        Se você não realizou esta compra, entre em contato conosco imediatamente.
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
