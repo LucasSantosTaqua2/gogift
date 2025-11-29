@@ -1,0 +1,149 @@
+<div class="container py-5 admin-orders-container">
+    
+    <div class="header mb-4">
+        <h1 class="title">Gestão de Pedidos</h1>
+        <p class="subtitle">Acompanhe todas as transações realizadas na plataforma.</p>
+    </div>
+
+    <div class="stats-grid mb-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        
+        <div class="summary-card">
+            <div class="summary-content">
+                <p class="summary-label">Volume Transacionado</p>
+                <p class="summary-value">{{ totalRevenue | currency:'BRL':'symbol':'1.2-2' }}</p>
+                <p class="summary-hint">Total pago pelos clientes (Pedidos Aprovados).</p>
+            </div>
+            <div class="summary-icon">
+                <i class="bi bi-cash-stack"></i>
+            </div>
+        </div>
+
+        <div class="summary-card" style="border-color: #4ade80;">
+            <div class="summary-content">
+                <p class="summary-label" style="color: #4ade80;">Lucro Líquido Plataforma</p>
+                <p class="summary-value" style="color: #4ade80;">{{ totalPlatformProfit | currency:'BRL':'symbol':'1.2-2' }}</p>
+                <p class="summary-hint">Net Amount (MP) - Repasse aos Vendedores.</p>
+            </div>
+            <div class="summary-icon">
+                <i class="bi bi-graph-up-arrow" style="color: #4ade80;"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="filters-container mb-4">
+        <div class="filters-header">
+            <i class="bi bi-funnel-fill me-2"></i>
+            <h4>Filtrar Pedidos</h4>
+        </div>
+        
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label>Comprador</label>
+                <input type="text" class="form-control" placeholder="Nome do usuário..." [(ngModel)]="searchBuyer">
+            </div>
+
+            <div class="filter-group">
+                <label>Status</label>
+                <div class="select-wrapper">
+                    <select [(ngModel)]="selectedStatus">
+                        <option [ngValue]="undefined">Todos</option>
+                        <option value="APPROVED">Aprovado</option>
+                        <option value="PENDING">Pendente</option>
+                        <option value="REJECTED">Rejeitado</option>
+                        <option value="REFUNDED">Estornado</option>
+                        <option value="EXPIRED">Expirado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Mês</label>
+                <div class="select-wrapper">
+                    <select [(ngModel)]="selectedMonth">
+                        <option [ngValue]="undefined">Todos</option>
+                        <option *ngFor="let m of months" [value]="m.value">{{ m.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Ano</label>
+                <div class="select-wrapper">
+                    <select [(ngModel)]="selectedYear">
+                        <option [ngValue]="undefined">Todos</option>
+                        <option *ngFor="let y of availableYears" [value]="y">{{ y }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-actions">
+            <button class="btn-apply-filters" (click)="applyFilters()" [disabled]="isLoading">Aplicar</button>
+            <button class="btn-clear-filters" (click)="clearFilters()" [disabled]="isLoading">Limpar</button>
+        </div>
+    </div>
+
+    <div class="table-section sales-history">
+        <div class="table-header">
+            <p class="title-table">Histórico de Transações</p>
+            <button class="btn-refresh" (click)="loadOrders()" title="Atualizar">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
+        </div>
+
+        <div class="table-container">
+            <div *ngIf="isLoading" class="loading p-5 text-center">
+                <div class="spinner-border text-light" role="status"></div>
+                <p class="mt-2 text-white">Carregando pedidos...</p>
+            </div>
+
+            <div *ngIf="!isLoading && orders.length === 0" class="no-data p-5 text-center text-white">
+                <p>Nenhum pedido encontrado.</p>
+            </div>
+
+            <table *ngIf="!isLoading && orders.length > 0" class="table table-hover text-white mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Comprador</th>
+                        <th>Data</th>
+                        <th>Total Pago</th>
+                        <th>Lucro Plataforma</th> <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td>
+                            <span class="fw-bold text-warning">#{{ order.id.split('-')[0] }}</span>
+                        </td>
+                        <td>
+                            {{ order.owner?.username }}
+                            <br><small class="text-muted">ID: {{ order.owner_id }}</small>
+                        </td>
+                        <td>{{ order.created_at | date:'dd/MM/yy HH:mm' }}</td>
+                        
+                        <td class="fw-bold text-white">
+                            {{ order.total_amount | currency:'BRL' }}
+                        </td>
+                        
+                        <td>
+                            <span *ngIf="order.status === 'APPROVED'" class="fw-bold text-success">
+                                + {{ calculateOrderProfit(order) | currency:'BRL' }}
+                            </span>
+                            <span *ngIf="order.status !== 'APPROVED'" class="text-muted">
+                                -
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge rounded-pill" [ngClass]="getStatusClass(order.status)">
+                                {{ order.status }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

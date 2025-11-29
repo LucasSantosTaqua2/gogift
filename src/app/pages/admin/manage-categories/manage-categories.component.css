@@ -1,0 +1,158 @@
+:host {
+  display: flex;
+  justify-content: center; 
+}
+
+.row{
+  height: 100%;
+}
+
+.container{
+  margin: 0;
+  margin-top: 20vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cabeçalho da Página */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: var(--orange);
+  padding: 6vh;
+  border-top-left-radius: 6vh;
+  border-top-right-radius: 6vh;
+  width: 100%;
+  margin: 0;
+}
+
+.btn{
+  background-color: var(--dark-orange);
+  transition: all 0.2s ease;
+  height: 8vh;
+}
+
+.bi-plus-circle{
+  transform: rotateZ(-180deg);
+  transition: all 0.4s ease;
+}
+
+.btn:hover{
+  transform: scale(1.02);
+}
+
+.btn:hover .bi-plus-circle{
+  transform: rotateZ(-360deg);
+}
+
+.header-section .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+/* Card Principal */
+.card {
+  border: none;
+  border-radius: 0;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  border-spacing: 1px;
+  gap: 1vh;
+  overflow: hidden; /* Garante que os cantos arredondados sejam aplicados a tudo */
+  width: 100%;
+  height: 100%;
+  background-color: var(--brown);
+  padding-bottom: 2vh;
+}
+
+.card-body{
+  width: 100%;
+}
+
+/* Seção do Formulário */
+.form-section {
+  padding: 1.5rem;
+}
+
+.form-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.form-actions button{
+  width: 100%;
+}
+
+.list-group{
+  width: 100%;
+  padding: 0 2vw;
+}
+
+.list-group-table{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background-color: var(--white);
+  overflow-y: auto;
+}
+
+/* Lista de Categorias */
+.list-group-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  transition: background-color 0.2s ease-in-out;
+  background-color: var(--light-brown);
+  border: none;
+}
+
+.list-group-item .actions {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.actions button{
+  width: 4vw;
+  height: 2vw;
+}
+
+.list-group-item:hover .actions {
+  opacity: 1;
+}
+
+/* Estados de Carregando e Vazio */
+.loading-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ced4da;
+}

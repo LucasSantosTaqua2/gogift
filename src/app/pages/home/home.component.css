@@ -1,0 +1,220 @@
+svg {
+    fill: #EFE8E0;
+}
+
+.categorias .cards .gift-card-link {
+    margin: 2vh 2vw; 
+}
+
+.banner {
+    margin-top: 12vh;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.bannerNF {
+    background: var(--orange);
+    width: 100%;
+    height: 100%;
+}
+
+.banner img {
+    height: 100%;
+}
+
+.vendidos,
+.maisamados,
+.categorias {
+    padding: 1vh;
+    margin-top: 7vh;
+    width: 100%;
+    height: auto;
+    min-height: 45vh;
+    background: var(--brown);
+}
+
+.notFound p {
+    margin: 2vh 0 4vh;
+    font-size: 2.5vh;
+}
+
+.svgBug {
+    width: 20vh;
+    height: 20vw;
+}
+
+#maisVendidosTitulo,
+#maisAmadosTitulo,
+#categoriasTitulo {
+    margin: 2.5vh 0;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: bold;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    max-width: none;
+}
+
+.row button {
+    top: 50%;
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    padding: 1vh;
+}
+
+#buttonBefore {
+    left: 0;
+}
+
+#buttonAfter {
+    right: 0;
+}
+
+.row button svg {
+    width: clamp(24px, 4vh, 48px);
+    height: clamp(24px, 4vh, 48px);
+}
+
+
+.empresa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.texto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #5B4B3F;
+    text-decoration: none;
+    text-shadow: 0 0 1vh #1D1302;
+    font-weight: bolder;
+    width: clamp(250px, 30%, 400px);
+    height: auto;
+    font-size: 2.5vh;
+    padding: 2vh;
+    text-align: center;
+}
+
+.texto span {
+    color: #E68210;
+}
+
+.texto::after,
+.texto::before {
+    content: '';
+    position: absolute;
+    height: 105%;
+    width: 102%;
+    background-image: conic-gradient(from var(--angle), transparent 70%, #c9720E);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    animation: 3s spin linear infinite;
+}
+
+.texto::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+.texto a {
+    text-decoration: none;
+    color: #EFE8E0;
+}
+
+@media (max-width: 768px) {
+    /* Container de Rolagem (Janela) */
+    .row {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto; /* Habilita rolagem lateral */
+        scroll-behavior: smooth;
+        padding: 2vh 0;
+        justify-content: flex-start; /* Alinha o início da rolagem à esquerda */
+        -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
+    }
+
+    /* Container dos Cards (Conteúdo Longo) */
+    .cards {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap; /* Impede que os itens quebrem linha */
+        justify-content: flex-start; /* Garante que os itens comecem da esquerda */
+        width: max-content; /* Permite que a div cresça além da tela */
+        gap: 4vw; /* Espaço entre os cards */
+        padding: 0 5vw; /* Padding lateral para o primeiro/último item não colar na borda */
+    }
+
+    /* O Card Individual */
+    .gift-card-link {
+        flex: 0 0 auto; /* Impede o card de encolher */
+        width: 35vw; /* Largura ideal para ver 2 cards e meio */
+        max-width: 160px; /* Limite máximo para não ficar gigante em tablets */
+        margin: 0; /* Remove margens antigas pois usamos gap */
+        text-align: center; /* Centraliza o texto dentro do link */
+    }
+
+    /* Esconde a barra de rolagem feia, mas mantém a função */
+    .row::-webkit-scrollbar {
+        display: none;
+    }
+    .row {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Ajustes da seção "Quer se tornar parceiro?" */
+    .empresa {
+        height: auto;
+        padding: 5vh 0;
+    }
+
+    .texto {
+        width: 80%;
+        height: auto;
+        font-size: 2.5vh;
+        text-align: center;
+        padding: 2vh;
+    }
+
+    .texto a {
+        font-size: 2.5vh;
+    }
+}

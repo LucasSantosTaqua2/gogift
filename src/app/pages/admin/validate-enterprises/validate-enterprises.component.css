@@ -1,0 +1,181 @@
+/* Front/src/app/pages/admin/validate-enterprises/validate-enterprises.component.css */
+
+.container {
+  margin-top: 12vh;
+  height: auto;
+  margin-bottom: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6vh;
+}
+
+.container-head {
+  background-color: var(--orange);
+  height: 100%;
+  padding: 2vh;
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+  box-shadow: 0px 5px 10px black;
+}
+
+.refresh svg {
+  width: 4vh;
+  height: 4vh;
+  -webkit-filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .7));
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .7));
+}
+
+.refresh{
+  transition: all 0.4s ease;
+}
+
+.refresh:hover{
+  transform: rotateZ(360deg);
+}
+
+.lead {
+  height: 80%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--brown);
+  padding: 25px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h4 {
+  margin-top: 0;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  color: black;
+}
+
+.h2{
+  margin: 2vh 0 0;
+}
+
+th {
+  background-color: var(--orange);
+  color: var(--white);
+  padding: 2vh;
+}
+
+td {
+  padding: 1vh;
+  background-color: var(--brown);
+  color: var(--white);
+}
+
+table:nth-child(odd) td {
+  background-color: var(--light-brown);
+}
+
+.table-section{
+  margin: 0;
+  gap: 0;
+}
+
+.table-header{
+  background-color: var(--brown);
+  padding-top: 2vh;
+}
+
+.table-responsive {
+  background-color: var(--brown);
+  border-bottom-left-radius: 1vh;
+  border-bottom-right-radius: 1vh;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.table-rejected{
+  padding: 0;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.tableButtons button {
+  height: 100%;
+  font-size: 0.9rem;
+}
+
+.approve {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
+.approve:hover {
+  background-color: var(--dark-orange);
+  color: var(--smoke-white);
+}
+
+.tableButtons button {
+  padding: 1vh;
+}
+
+.alert{
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--brown);
+  border: none;
+  border-radius: 0;
+  border-bottom-left-radius: 2vh;
+  border-bottom-right-radius: 2vh;
+  position: relative;
+}
+
+.alert{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+
+.alert p{
+  margin: 0;
+  display: flex; 
+}
+
+
+
+.modal-actions .confirm{
+   color: var(--white);
+  background-color: var(--orange);
+  transition: all 0.2s ease;
+}
+
+.modal-actions .confirm:hover{
+  filter: brightness(1.1);
+}

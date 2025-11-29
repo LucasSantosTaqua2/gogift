@@ -1,0 +1,185 @@
+.admin-orders-container {
+    margin-top: 12vh;
+    color: var(--white);
+}
+
+.title {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.subtitle {
+    color: var(--smoke-white);
+}
+
+/* Summary Card (Igual ao Dashboard de Vendas) */
+.summary-card {
+    background: linear-gradient(135deg, #2c1e14, #3e2b1d);
+    border: 1px solid var(--orange);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.summary-label {
+    color: var(--smoke-white);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.summary-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin: 0;
+}
+
+.summary-icon i {
+    font-size: 3rem;
+    color: var(--orange);
+    opacity: 0.3;
+}
+
+/* Filtros (Reutilizado) */
+.filters-container {
+    background-color: var(--brown);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.filters-header {
+    display: flex;
+    align-items: center;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+}
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.filter-group label {
+    color: var(--smoke-white);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--smoke-white);
+    color: var(--dark-brown);
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+option{
+    color: black;
+}
+
+.btn-apply-filters {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-clear-filters {
+    background: transparent;
+    border: 1px solid var(--smoke-white);
+    color: var(--smoke-white);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* Tabela */
+.table-section {
+    background-color: var(--brown);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table-header {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-table {
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-refresh {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-refresh:hover {
+    color: var(--orange);
+    transform: rotate(180deg);
+}
+
+.table th {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--orange);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table td {
+    background-color: transparent;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+/* Badges de Status */
+.status-approved {
+    background-color: #198754;
+    color: white;
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.status-rejected {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-refunded {
+    background-color: #0dcaf0;
+    color: black;
+}
+
+.status-expired {
+    background-color: #6c757d;
+    color: white;
+}

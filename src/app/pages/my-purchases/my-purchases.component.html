@@ -1,0 +1,179 @@
+<div class="container">
+  <h1>Minhas Compras</h1>
+  <p>Aqui está todo o seu histórico de pedidos.</p>
+
+  <div *ngIf="isLoading" class="loading-indicator">Carregando...</div>
+
+  <div *ngIf="!isLoading && approvedOrders.length > 0" class="table-section">
+    <h2>Pedidos Aprovados</h2>
+    <div *ngFor="let order of approvedOrders" class="order-card">
+      <div class="order-header">
+        <div>
+          <strong>Pedido:</strong> #{{ order.id.split('-')[0] }}
+        </div>
+        <div>
+          <strong>Data:</strong> {{ order.created_at | date:'dd/MM/yyyy' }}
+        </div>
+        <div>
+          <strong>Total:</strong> {{ order.total_amount | currency:'BRL' }}
+        </div>
+        <div>
+            <span class="status approved">{{ translateStatus(order.status) }}</span>
+        </div>
+      </div>
+      <div class="order-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Valor Unit.</th>
+              <th class="cod">Destino / Códigos</th> 
+              <th>Status do Código</th>
+              <th style="text-align: center;">Ações</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.original_giftcard.title }}</td>
+              <td>{{ item.unit_price | currency:'BRL' }}</td>
+              
+              <td class="code-cell-mixed">
+                
+                <div *ngIf="item.final_giftcard_codes" class="my-code-action" (click)="openQrModal(item)" title="Clique para ver seus códigos">
+                    <div class="reveal-btn-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+                          <path d="M2 2h2v2H2V2Z"/>
+                          <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z"/>
+                          <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z"/>
+                          <path d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-3v-1Z"/>
+                        </svg>
+                       <span>Ver Meu(s) Código(s)</span>
+                    </div>
+                </div>
+
+                <div *ngIf="item.gift_items && item.gift_items.length > 0" class="sent-gifts-list">
+                    <div *ngFor="let gift of item.gift_items" class="gift-badge" title="Código enviado por e-mail">
+                        🎁 {{ gift.quantity }}x Enviado para <p class="recipient-name">{{ gift.recipient_name }}</p>
+                    </div>
+                </div>
+
+              </td>
+
+              <td>
+                <span class="status" [ngClass]="item.status.toLowerCase()">
+                  {{ translateStatus(item.status) }}
+                </span>
+              </td>
+
+              <td style="text-align: center; min-width: 140px;">
+                 <div *ngIf="item.user_rating; else rateButtonBlock" class="my-rating-display" title="Sua avaliação">
+                    <div style="display: flex; justify-content: center; gap: 2px;">
+                        <svg *ngFor="let i of [1,2,3,4,5]" 
+                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"
+                             [style.fill]="i <= item.user_rating! ? 'var(--orange)' : '#ccc'">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #aaa; display: block; margin-top: 2px;">Sua nota: {{ item.user_rating }}</span>
+                 </div>
+
+                 <ng-template #rateButtonBlock>
+                     <button class="btn-rate" (click)="openRatingModal(item)" title="Avaliar Produto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                            <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8 2.223v9.804z"/>
+                        </svg>
+                        Avaliar
+                     </button>
+                 </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && pendingOrders.length > 0" class="table-section">
+     <h2>Aguardando Confirmação</h2>
+    <p class="subtitle">Estes pedidos aguardam a confirmação do pagamento.</p>
+     <div *ngFor="let order of pendingOrders" class="order-card pending">
+      <div class="order-header">
+        <div><strong>Pedido:</strong> #{{ order.id.split('-')[0] }}</div>
+        <div><strong>Data:</strong> {{ order.created_at | date:'dd/MM/yyyy' }}</div>
+        <div><strong>Total:</strong> {{ order.total_amount | currency:'BRL' }}</div>
+        <div>
+            <span class="status pending">{{ translateStatus(order.status) }}</span>
+        </div>
+      </div>
+      <div class="order-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Qtd.</th>
+              <th>Valor Unit.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.original_giftcard.title }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.unit_price | currency:'BRL' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && approvedOrders.length === 0 && pendingOrders.length === 0" class="empty-message">
+    <p>Você ainda não fez nenhuma compra.</p>
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="isQrModalVisible" (click)="closeQrModal()">
+    <div class="popup-content qr-modal" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeQrModal()">X</button>
+        
+        <h4>{{ selectedQrProductTitle }}</h4>
+        
+        <p class="instruction">Apresente este código no estabelecimento</p>
+
+        <div class="qr-wrapper">
+            <qrcode 
+                [qrdata]="selectedQrCode" 
+                [width]="200" 
+                [errorCorrectionLevel]="'M'">
+            </qrcode>
+        </div>
+
+        <div class="code-display">
+            {{ selectedQrCode }}
+        </div>
+        
+        <button class="btn-copy" (click)="copyCodeFromModal()">
+            Copiar Código
+        </button>
+    </div>
+</div>
+
+<div class="popup-overlay" *ngIf="isRatingModalVisible" (click)="closeRatingModal()">
+    <div class="popup-content rating-modal" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeRatingModal()">X</button>
+        <h4>Avaliar: {{ ratingProductTitle }}</h4>
+        
+        <div class="stars-container" style="margin: 20px 0; text-align: center;">
+            <svg *ngFor="let star of [1,2,3,4,5]" 
+                 (click)="setRating(star)"
+                 xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"
+                 [style.fill]="star <= currentRating ? 'var(--orange)' : '#ccc'"
+                 style="cursor: pointer; margin: 0 5px; transition: fill 0.2s;">
+                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+        </div>
+        
+        <button class="btn-confirm-rate" (click)="submitRating()">
+            Enviar Avaliação
+        </button>
+    </div>
+</div>

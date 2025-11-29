@@ -1,0 +1,308 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+/* =========================================
+   ESTILOS GERAIS (Desktop First)
+   ========================================= */
+
+/* Container Principal */
+.container {
+    margin-top: 15vh;
+    padding: 2rem;
+    width: 90vw;
+    min-height: 70vh;
+    height: auto;
+    background-color: #5B4B3F;
+    border-radius: 30px;
+    display: flex;
+    gap: 2rem;
+    box-sizing: border-box;
+    position: relative; /* Para posicionamento se necessário */
+}
+
+/* Botão de Toggle Filtros (Escondido no Desktop) */
+.btn-toggle-filters {
+    display: none; /* Padrão desktop */
+    width: 100%;
+    padding: 12px;
+    background-color: var(--dark-brown);
+    color: var(--white);
+    border: 2px solid var(--orange);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s;
+    margin-bottom: 1rem;
+}
+
+.btn-toggle-filters:hover {
+    background-color: var(--orange);
+}
+
+/* Coluna de Filtros */
+.filters {
+    flex: 0 0 250px;
+    background-color: var(--dark-brown);
+    padding: 1.5rem;
+    border-radius: 15px;
+    align-self: flex-start;
+    height: fit-content;
+}
+
+.filters h3 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--orange);
+    padding-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--smoke-white);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--smoke-white);
+    color: var(--dark-brown);
+}
+
+.form-control, .form-control option {
+    color: black; 
+}
+
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-inputs span {
+    color: var(--white);
+    font-weight: bold;
+}
+
+/* Botões de Filtro */
+.filter-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btn-apply, .btn-clear {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-apply {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.btn-apply:hover {
+    background-color: var(--dark-orange);
+    transform: translateY(-2px);
+}
+
+.btn-clear {
+    background-color: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+
+.btn-clear:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Conteúdo Principal (Resultados) */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.infos-search {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.info-search {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    margin: 0;
+}
+
+/* Grid de Cards */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.gift-card-link {
+    flex: 0 0 calc(20% - 16px); 
+    max-width: calc(20% - 16px);
+    text-decoration: none;
+    color: inherit;
+}
+
+.load-more-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.load-more-btn {
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.load-more-btn:hover {
+    transform: scale(1.05);
+    background-color: var(--dark-orange);
+}
+
+.loading-indicator, .no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--white);
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+/* =========================================
+   MEDIA QUERIES (Responsividade)
+   ========================================= */
+
+/* Tablets e Laptops Pequenos (até 1200px) -> 3 por linha */
+@media (max-width: 1200px) {
+    .gift-card-link {
+        flex: 0 0 calc(33.333% - 14px);
+        max-width: calc(33.333% - 14px);
+    }
+}
+
+/* Tablets em modo Retrato e Mobile Grande (até 900px) */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column; /* Empilha filtros e conteúdo */
+        width: 95vw;
+        margin-top: 15vh;
+        padding: 1.5rem;
+    }
+
+    /* Exibe o botão de toggle */
+    .btn-toggle-filters {
+        display: flex; 
+    }
+
+    /* Esconde os filtros por padrão */
+    .filters {
+        display: none;
+        width: 100%;
+        flex: none;
+        margin-bottom: 2rem;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    /* Exibe os filtros quando a classe .mobile-visible estiver ativa */
+    .filters.mobile-visible {
+        display: block;
+    }
+
+    .filter-actions {
+        flex-direction: row;
+    }
+    
+    .btn-apply, .btn-clear {
+        flex: 1;
+    }
+
+    .gift-card-link {
+        flex: 0 0 calc(33.333% - 14px);
+        max-width: calc(33.333% - 14px);
+    }
+}
+
+/* Mobile Geral (até 768px) -> 2 por linha */
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0;
+        width: 100%;
+        min-height: 100vh;
+        margin-top: 12vh;
+        padding: 1rem;
+        background-color: var(--brown);
+    }
+
+    .cards {
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    .gift-card-link {
+        flex: 0 0 calc(50% - 5px);
+        max-width: calc(50% - 5px);
+    }
+    
+    .load-more-btn {
+        padding: 12px 30px;
+        width: 80%;
+    }
+}
+
+/* Telas muito pequenas (até 480px) */
+@media (max-width: 480px) {
+    .filter-actions {
+        flex-direction: column;
+    }
+
+    .cards {
+        gap: 8px;
+    }
+
+    .gift-card-link {
+        flex: 0 0 calc(50% - 4px);
+        max-width: calc(50% - 4px);
+    }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

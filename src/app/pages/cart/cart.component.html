@@ -1,0 +1,224 @@
+<head>
+    <title>GoGift - Carrinho</title>
+</head>
+
+<div class="containerPc">
+    <div class="header">
+        <p class="title">Carrinho de Compras</p>
+    </div>
+
+    <div class="body">
+        <div class="table-wrapper" *ngIf="cartItems.length > 0; else emptyCart">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Detalhes</th>
+                        <th>Preço Unit.</th>
+                        <th>Quantidade</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cartItems">
+                        <td class="col-img">
+                            <a [routerLink]="['/product-page/', item.product.id]">
+                                <img [src]="'http://127.0.0.1:8000/uploads/' + item.product.imageUrl"
+                                    [alt]="item.product.title"
+                                    (error)="$any($event.target).src='assets/placeholder.png'">
+                            </a>
+                        </td>
+                        <td style="text-align: left;">
+                            <p class="prod-title">{{ item.product.title }}</p>
+                            
+                            <div class="gift-section-preview">
+                                <button class="btn-toggle-gift" (click)="toggleGiftForm(item)">
+                                    <span *ngIf="item.gifts && item.gifts.length > 0">🎁 {{ item.gifts.length }} Presente(s) configurado(s)</span>
+                                    <span *ngIf="!item.gifts || item.gifts.length === 0">🎁 Enviar como Presente?</span>
+                                </button>
+
+                                <div *ngIf="item.gifts && item.gifts.length > 0" class="added-gifts-list">
+                                    <div *ngFor="let g of item.gifts; let i = index" class="gift-tag">
+                                        <small><b>{{g.quantity}}x</b> para {{g.name}}</small>
+                                        <span (click)="removeGift(item, i)" class="remove-gift-x">×</span>
+                                    </div>
+                                    <div class="remaining-info">
+                                        <small>Para você: <b>{{ getRemainingQuantity(item) }}</b> un.</small>
+                                    </div>
+                                </div>
+
+                                <div class="gift-form-container" *ngIf="openGiftFormId === item.product.id">
+                                    <div class="gift-form-header">
+                                        <span>Adicionar Destinatário</span>
+                                        <button (click)="toggleGiftForm(item)" class="close-form">×</button>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <input [(ngModel)]="newGift.name" placeholder="Nome do amigo" class="form-input">
+                                        <input [(ngModel)]="newGift.email" placeholder="E-mail" class="form-input">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="qty-wrapper">
+                                            <label>Qtd:</label>
+                                            <input type="number" [(ngModel)]="newGift.quantity" min="1" [max]="getRemainingQuantity(item)" class="form-input small">
+                                        </div>
+                                        <input [(ngModel)]="newGift.message" placeholder="Mensagem (opcional)" class="form-input">
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <small>Restantes: {{ getRemainingQuantity(item) }}</small>
+                                        <button (click)="addGift(item)" class="btn-add-gift" [disabled]="getRemainingQuantity(item) < 1">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>R$ {{ item.product.valor | number:'1.2-2' }}</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button (click)="decreaseQuantity(item)">-</button>
+                                <span>{{ item.quantity }}</span>
+                                <button (click)="increaseQuantity(item)"
+                                    [disabled]="item.quantity >= item.product.quantityavailable">+</button>
+                            </div>
+                        </td>
+                        <td class="prod-total">R$ {{ (item.product.valor * item.quantity) | number:'1.2-2' }}</td>
+                        <td>
+                            <button class="remove-btn" (click)="removeItem(item)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m3.5-.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m3.5.029l-.5 8.5a.5.5 0 1 0 .998.06l.5-8.5a.5.5 0 1 0-.998-.06" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #emptyCart>
+            <app-empty-cart></app-empty-cart>
+        </ng-template>
+    </div>
+
+    <div class="cart-footer" *ngIf="cartItems.length > 0">
+        <div class="resumo-financeiro">
+            <div class="resumo-linha">
+                <p>Valor dos Produtos:</p>
+                <span>R$ {{ totalProdutosBase | number:'1.2-2' }}</span>
+            </div>
+            <div class="resumo-linha sm">
+                <p>+ Taxa da Plataforma (3%):</p>
+                <span>R$ {{ taxaPlataforma | number:'1.2-2' }}</span>
+            </div>
+            <hr class="divider">
+            <div class="resumo-linha bold">
+                <p>Subtotal Itens:</p>
+                <span>R$ {{ subtotalComPlataforma | number:'1.2-2' }}</span>
+            </div>
+            <div class="resumo-linha sm">
+                <p>+ Taxa de Serviço (5%):</p>
+                <span>R$ {{ taxaServico | number:'1.2-2' }}</span>
+            </div>
+            
+            <div class="total-final">
+                <p>Total:</p>
+                <span>R$ {{ totalPedido | number:'1.2-2' }}</span>
+            </div>
+        </div>
+        
+        <button class="finalizar" (click)="finalizarCompra()" [disabled]="isLoading">
+            {{ isLoading ? 'Processando...' : 'Finalizar Compra' }}
+        </button>
+    </div>
+</div>
+
+<div class="containerMobile">
+    <header class="header-mobile">
+        <p>Carrinho de Compras</p>
+    </header>
+
+    <div class="mobile-body" *ngIf="cartItems.length > 0; else emptyCartMobile">
+        <div class="cart-list">
+            <div class="mobile-card" *ngFor="let item of cartItems">
+                <div class="card-img">
+                    <img [src]="'http://127.0.0.1:8000/uploads/' + item.product.imageUrl"
+                         [alt]="item.product.title"
+                         (error)="$any($event.target).src='assets/placeholder.png'">
+                </div>
+                
+                <div class="card-details">
+                    <div class="card-top">
+                        <p class="card-title">{{ item.product.title }}</p>
+                        <button class="remove-btn-mobile" (click)="removeItem(item)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m3.5-.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m3.5.029l-.5 8.5a.5.5 0 1 0 .998.06l.5-8.5a.5.5 0 1 0-.998-.06" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-price-unit">
+                        Unit: R$ {{ item.product.valor | number:'1.2-2' }}
+                    </div>
+
+                    <div class="card-bottom">
+                        <div class="quantity-controls mobile-qty">
+                            <button (click)="decreaseQuantity(item)">-</button>
+                            <span>{{ item.quantity }}</span>
+                            <button (click)="increaseQuantity(item)" [disabled]="item.quantity >= item.product.quantityavailable">+</button>
+                        </div>
+                        <div class="card-total">
+                            R$ {{ (item.product.valor * item.quantity) | number:'1.2-2' }}
+                        </div>
+                    </div>
+
+                    <div class="mobile-gift-section">
+                        <button class="btn-toggle-gift-mobile" (click)="toggleGiftForm(item)">
+                            🎁 {{ (item.gifts && item.gifts.length > 0) ? 'Gerenciar Presentes (' + item.gifts.length + ')' : 'Enviar Presente' }}
+                        </button>
+
+                        <div class="gift-form-container mobile-style" *ngIf="openGiftFormId === item.product.id">
+                            <p class="gift-title">Enviar para Amigo</p>
+                            
+                            <div *ngFor="let g of item.gifts; let i = index" class="gift-tag-mobile">
+                                <span>{{g.quantity}}x {{g.name}}</span>
+                                <span (click)="removeGift(item, i)" class="remove-x">×</span>
+                            </div>
+
+                            <input [(ngModel)]="newGift.name" placeholder="Nome" class="form-input mobile-input">
+                            <input [(ngModel)]="newGift.email" placeholder="Email" class="form-input mobile-input">
+                            <div style="display:flex; gap:5px;">
+                                <input type="number" [(ngModel)]="newGift.quantity" class="form-input mobile-input" style="width:60px" placeholder="Qtd">
+                                <input [(ngModel)]="newGift.message" placeholder="Msg (opcional)" class="form-input mobile-input" style="flex:1">
+                            </div>
+
+                            <button (click)="addGift(item)" class="btn-add-gift mobile-btn">Adicionar</button>
+                            <small class="mobile-remaining">Restantes para você: {{ getRemainingQuantity(item) }}</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-footer-summary">
+            <div class="summary-toggle">
+                <p>Total</p>
+                <p class="total-value">R$ {{ totalPedido | number:'1.2-2' }}</p>
+            </div>
+            <div class="mini-details">
+                <small>Taxas incluídas: R$ {{ taxaPlataforma + taxaServico | number:'1.2-2' }}</small>
+            </div>
+            <button class="finalizar-mobile" (click)="finalizarCompra()" [disabled]="isLoading">
+                {{ isLoading ? 'Processando...' : 'Finalizar Compra' }}
+            </button>
+        </div>
+    </div>
+    
+    <ng-template #emptyCartMobile>
+        <div class="empty-container-mobile">
+            <app-empty-cart></app-empty-cart>
+        </div>
+    </ng-template>
+</div>

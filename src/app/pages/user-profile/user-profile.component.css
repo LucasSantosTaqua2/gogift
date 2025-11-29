@@ -1,0 +1,167 @@
+:root{
+    max-height: 100vh;
+    overflow-y: hidden;
+}
+
+.body {
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    background-color: var(--brown);
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.sidebar {
+    height: 100%;
+    width: 20vw;
+    padding: 18vh 1vw 0;
+    background-color: var(--dark-brown);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2vh;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    padding: 0 1vw;
+    align-items: center;
+    margin-bottom: 1vh;
+}
+
+.user p {
+    font-weight: bold;
+}
+
+.user svg {
+    width: 6vh;
+    height: 6vh;
+    margin-right: 1vh;
+    padding: 1vh;
+    border-radius: 100%;
+    background: var(--brown);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.userInfo input{
+    display: none;
+}
+
+.userInfo p {
+    text-align: left;
+    margin: 0;
+    font-size: 1rem;
+    margin-left: 1vh;
+    transition: all 0.2s ease;
+}
+
+.userInfo:hover p {
+    color: var(--orange);
+}
+
+.userInfo svg {
+    height: 3vh;
+    width: 3vh;
+    fill: var(--orange);
+    margin-bottom: 0.5vh;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh;
+    padding-bottom: 4vh;
+}
+  
+.enterprise {
+    padding: 0 6vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.enterprise div{
+    width: 100%;
+}
+
+app-gc-guide section{
+    width: 60vw;
+}
+
+.guideContainer{
+    width: 100%;
+}
+
+.loading-status {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.status-card {
+    width: 60%; /* Largura similar ao formulário */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    background-color: var(--light-brown);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.status-card .card-header {
+    background-color: var(--orange);
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+    text-align: center;
+}
+
+.status-card .card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.status-card .card-body {
+    padding: 2rem;
+    text-align: center;
+}
+
+.status-card p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.status-card strong {
+    font-weight: 600;
+}
+
+.status-pending, .status-rejected {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
+}
+
+.status-rejected {
+    background-color: #dc3545; /* Vermelho */
+}
+
+.contact-support {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--brown);
+    padding-top: 1rem;
+}

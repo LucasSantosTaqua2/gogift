@@ -1,0 +1,238 @@
+.rodape {
+    background: var(--brown);
+    height: 40vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+    gap: 4vw;
+    padding: 2vh 4vw;
+    align-items: center;
+    max-width: fit-content;
+}
+
+.contato{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2vh;
+}
+
+.info a{
+    color: var(--orange);
+}
+
+.info a:hover{
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.info svg{
+    border-radius: 50%;
+    width: 6vh;
+    height: 6vh;
+    padding: 1.4vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.tInfo{
+    text-align: left;
+    font-size: 0.8rem;
+}
+
+.pInfo{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.bi-telephone-fill{
+    padding: 1vh;
+}
+
+.about{ 
+    grid-column: 2 / 3;     
+    grid-row: 1 / 2;        
+    justify-self: center;
+    align-self: center;   
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    justify-items: start;
+    gap: 2vh;
+    flex-direction: column;
+    padding: 2vh 1vw;
+    text-align: left;
+}
+
+.title{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.desc{
+    font-size: 0.8rem;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1vh;
+}
+
+.links a{
+    transition: all 0.2s ease;
+}
+
+.links a:hover{
+    transform: scale(1.1);
+}
+
+.links svg{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1vh;
+    width: 5vh;
+    height: 5vh;
+}
+
+.links a, .links svg{
+    color: var(--white);
+    fill: var(--white);
+}
+
+.formas-pgmt{
+    justify-self: end;
+    width: fit-content;
+    height: 60%;
+    background-color: rgb(255, 231, 0);
+    border-radius: 2vh;
+
+}
+
+.formas-pgmt img{
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .rodape {
+        height: auto;
+        padding: 3rem 0; /* Mais respiro vertical (usando rem em vez de vh) */
+        background: var(--brown); /* Garante a cor de fundo */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centraliza tudo horizontalmente */
+        gap: 3rem; /* Aumenta o espaço entre os blocos (Contato / Sobre / Pagamento) */
+        padding: 0 1.5rem; /* Margem lateral segura */
+        max-width: 100%;
+    }
+
+    /* --- 1. Seção de Contato --- */
+    .contato {
+        width: 100%;
+        align-items: center; /* Garante que tudo fique no centro */
+        gap: 1.5rem; /* Espaço entre cada item de contato */
+    }
+
+    .info {
+        flex-direction: column; /* Empilha Ícone em cima, Texto embaixo */
+        text-align: center;
+        gap: 0.5rem; /* Espaço entre ícone e texto */
+    }
+
+    .info svg {
+        width: 2.5rem; /* Ícones levemente maiores para toque */
+        height: 2.5rem;
+        padding: 0.6rem;
+        background-color: rgba(0, 0, 0, 0.3); /* Fundo um pouco mais suave */
+    }
+
+    .tInfo, .pInfo {
+        text-align: center; /* Força o texto a ficar centralizado */
+        font-size: 1rem; /* Tamanho legível */
+    }
+
+    /* --- 2. Seção Sobre Nós --- */
+    .about {
+        /* Reseta grid do desktop */
+        grid-column: auto;
+        grid-row: auto;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.4rem; /* Título um pouco maior */
+        margin-bottom: 1rem;
+        color: var(--orange); /* Destaque na cor */
+    }
+
+    .desc {
+        font-size: 0.95rem;
+        line-height: 1.6; /* Melhora leitura */
+        color: #ddd; /* Contraste suave */
+        margin-bottom: 1.5rem;
+        max-width: 400px; /* Evita linhas muito longas em tablets */
+    }
+
+    .links {
+        gap: 1.5rem; /* Mais espaço entre os ícones sociais */
+    }
+
+    .links svg {
+        width: 3rem; /* Área de toque maior */
+        height: 3rem;
+        padding: 0.8rem;
+        transition: transform 0.2s;
+    }
+    
+    .links svg:active {
+        transform: scale(0.95); /* Feedback visual de clique */
+    }
+
+    /* --- 3. Seção Pagamento --- */
+    .formas-pgmt {
+        justify-self: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        /* Remove o fundo amarelo que pode ficar feio se a imagem não preencher tudo */
+        background-color: transparent; 
+        height: auto;
+        margin-top: 1rem;
+    }
+
+    .formas-pgmt img {
+        max-width: 280px; /* Tamanho máximo controlado */
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+        /* Se quiser manter um fundo sutil arredondado na imagem: */
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+    }
+}

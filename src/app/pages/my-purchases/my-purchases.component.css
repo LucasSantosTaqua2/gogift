@@ -1,0 +1,377 @@
+.container {
+    margin-top: 15vh;
+    padding: 2rem;
+    min-height: 70vh;
+}
+
+/* Nova estrutura de "cards" para cada pedido */
+.order-card {
+    background-color: var(--brown);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Garante que os cantos arredondados sejam aplicados */
+    border: 1px solid var(--dark-brown);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--dark-brown);
+    font-size: 0.9rem;
+}
+
+.order-header div {
+    flex: 1;
+}
+
+.order-card.pending .order-header {
+    background-color: #856404; /* Amarelo escuro para destacar pendentes */
+}
+
+.order-body table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.table-section {
+    margin-bottom: 3rem;
+}
+
+.table-section h2 {
+    text-align: left;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brown);
+}
+
+.table-section .subtitle {
+    text-align: left;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+th, td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--dark-brown);
+    text-align: left;
+}
+
+th {
+    background-color: var(--light-brown);
+    font-weight: 600;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.cod {
+  text-align: center;
+}
+
+.status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.status.approved { background-color: #28a745; }
+.status.pending { background-color: #ffc107; color: #333; }
+
+.code-cell {
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+  
+.code-cell:hover {
+    background-color: var(--light-brown);
+}
+  
+.placeholder-text {
+    color: #888;
+    font-style: italic;
+}
+  
+.revealed-code {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--orange);
+}
+  
+.empty-message {
+    text-align: center;
+    padding: 3rem;
+    font-style: italic;
+    color: #aaa;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+}
+
+.btn-rate {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-rate:hover {
+    background-color: var(--dark-orange);
+    transform: scale(1.05);
+}
+
+/* MODAL DE AVALIAÇÃO */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.popup-content.rating-modal {
+    background-color: var(--brown);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    color: var(--white);
+    border: 1px solid var(--orange);
+}
+
+.rating-modal h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--orange);
+    font-size: 1.5rem;
+}
+
+.stars-container {
+    margin: 25px 0;
+}
+
+.rating-modal textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--smoke-white);
+    color: var(--dark-brown);
+    margin-bottom: 20px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.rating-modal textarea:focus {
+    outline: 2px solid var(--orange);
+}
+
+.btn-confirm-rate {
+    width: 100%;
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-confirm-rate:hover {
+    background-color: var(--dark-orange);
+    transform: translateY(-2px);
+}
+
+.close-btn {
+    color: var(--white);
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--orange);
+}
+
+/* Estilos para a célula de clicar e revelar */
+.code-cell {
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    transition: background-color 0.2s;
+    background-color: #3e2b1d; /* Um marrom levemente diferente para destaque */
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.code-cell:hover {
+    background-color: var(--orange);
+}
+
+.reveal-btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px;
+}
+
+/* Modal e Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.popup-content {
+    background-color: var(--brown);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px; /* Modal um pouco menor para o QR Code */
+    text-align: center;
+    color: var(--white);
+    border: 1px solid var(--orange);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Header do Modal */
+.qr-modal h4 {
+    margin-top: 10px;
+    color: var(--orange);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.instruction {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Área branca do QR Code */
+.qr-wrapper {
+    background: white;
+    padding: 15px;
+    display: inline-block;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Texto do código abaixo do QR */
+.code-display {
+    font-family: monospace;
+    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    word-break: break-all;
+    border: 1px dashed #666;
+}
+
+/* Botão de Copiar */
+.btn-copy {
+    width: 100%;
+    background-color: var(--light-brown);
+    color: white;
+    border: 1px solid var(--orange);
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-copy:hover {
+    background-color: var(--orange);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--white);
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--orange);
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.code-cell-mixed {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.sent-gifts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 5px;
+}
+
+.gift-badge {
+    background-color: #fdf2ce;
+    color: #8a6d3b;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    border: 1px solid #faebcc;
+}
+
+.recipient-name {
+    color: black;
+}
